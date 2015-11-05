@@ -10,3 +10,4 @@ public class JavaNatanServlet extends HttpServlet {
 		resp.getWriter().println("Hello, virusworld");
 	}
 }
+רפי מה הולך?
