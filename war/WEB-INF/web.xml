@@ -4,14 +4,18 @@ xmlns="http://java.sun.com/xml/ns/javaee"
 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+
+
+
 	<servlet>
-		<servlet-name>JavaNatan</servlet-name>
-		<servlet-class>com.myorg.javacourse.JavaNatanServlet</servlet-class>
+		<servlet-name>exercise03Servlet</servlet-name>
+		<servlet-class>com.myorg.javacourse.Exercise03Servlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>JavaNatan</servlet-name>
-		<url-pattern>/javanatan</url-pattern>
+		<servlet-name>exercise03Servlet</servlet-name>
+		<url-pattern>/exercise03Servlet</url-pattern>
 	</servlet-mapping>
+	
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
