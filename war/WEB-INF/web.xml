@@ -8,12 +8,12 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 
 
 	<servlet>
-		<servlet-name>exercise03Servlet</servlet-name>
-		<servlet-class>com.myorg.javacourse.Exercise03Servlet</servlet-class>
+		<servlet-name>StockDetailsServlet</servlet-name>
+		<servlet-class>com.myorg.javacourse.StockDetailsServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>exercise03Servlet</servlet-name>
-		<url-pattern>/exercise03Servlet</url-pattern>
+		<servlet-name>StockDetailsServlet</servlet-name>
+		<url-pattern>/stockdetails</url-pattern>
 	</servlet-mapping>
 	
 	<welcome-file-list>

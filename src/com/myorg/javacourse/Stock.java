@@ -1,11 +1,28 @@
 package com.myorg.javacourse;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Stock {
 	private String symbol;
-	private float ask;
-	private float bid;
-	private java.util.Date date;
+	private float ask,bid;
+	private Date date;
+
+	private SimpleDateFormat dataFormat =new SimpleDateFormat("MM/dd/YYYY");
 	
+	public Stock(String symbol, float ask, float bid, Date date) {
+		setSymbol  (symbol);
+		setAsk  (ask);
+		setBid  (bid);
+		setDate  (date);
+	}
+	
+	public SimpleDateFormat getDataFormat() {
+		return dataFormat;
+	}
+	public void setDataFormat(SimpleDateFormat dataFormat) {
+		this.dataFormat = dataFormat;
+	}
 	public String getSymbol() {
 		return symbol;
 	}
@@ -24,14 +41,14 @@ public class Stock {
 	public void setBid(float bid) {
 		this.bid = bid;
 	}
-	public java.util.Date getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(java.util.Date date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	public String getHtmlDescription(){
-		String result = "<b>Symbol:</b> "+ this.symbol + ", <b>Ask:</b> "+ this.ask + ", <b>Bid:</b> "+ this.bid + ", <b>Date:</b> "+ this.date ;
+		String result = "<b>Symbol:</b> "+ this.symbol + ", <b>Ask:</b> "+ this.ask + ", <b>Bid:</b> "+ this.bid + ", <b>Date:</b> "+ dataFormat.format(this.date)+ "<br>" ;
 		return result;
 	}
 	
