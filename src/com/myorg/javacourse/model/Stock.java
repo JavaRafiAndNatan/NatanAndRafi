@@ -83,8 +83,4 @@ public class Stock {
 		String result = "<b>Symbol:</b> "+ this.symbol + ", <b>Ask:</b> "+ this.ask + ", <b>Bid:</b> "+ this.bid + ", <b>Date:</b> "+ dataFormat.format(this.date)+ "<br>" ;
 		return result;
 	}
-	
-	
-
-
 }
