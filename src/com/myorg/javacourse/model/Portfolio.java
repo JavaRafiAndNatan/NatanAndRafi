@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Portfolio {
 	/**
-	 *  the class for the Portfolio typhus and method
+	 *  the class for the Portfolio typhus and method-natan
 	 */
 	public enum ALGO_RECOMMENDATIN {BUY, SELL, REMOVE, HOLD};
 	private String title;
