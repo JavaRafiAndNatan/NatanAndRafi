@@ -3,10 +3,12 @@ package com.myorg.javacourse.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.algo.model.StockInterface;
+
 import com.myorg.javacourse.model.Portfolio.ALGO_RECOMMENDATIN;
 
 
-public class Stock {
+public class Stock implements StockInterface{
 	/**
 	 *  the class for the Stock typhus and method
 	 */

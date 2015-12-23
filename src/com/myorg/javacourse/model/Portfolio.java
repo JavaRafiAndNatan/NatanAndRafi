@@ -2,15 +2,18 @@ package com.myorg.javacourse.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.algo.model.PortfolioInterface;
+import org.algo.model.StockInterface;
 
-public class Portfolio {
+
+public class Portfolio implements PortfolioInterface {
 	/**
-	 *  the class for the Portfolio typhus and method-natan
+	 *  the class for the Portfolio typhus and method
 	 */
 	public enum ALGO_RECOMMENDATIN {BUY, SELL, REMOVE, HOLD};
 	private String title;
 	private final static int MAX_PORTFOLIO_SIZE =5;
-	private Stock [] stocks;
+	private StockInterface[] stocks;
 	private int portfolioSize;
 	private float balance;
 	
@@ -24,7 +27,7 @@ public class Portfolio {
 	public Portfolio(Portfolio copyPortfolio) {
 		this.portfolioSize=copyPortfolio.getPortfolioSize();
 		for(int i=0; i<this.getPortfolioSize();i++)
-			this.stocks[i]=new Stock(copyPortfolio.stocks[i]);
+			this.stocks[i]=new Stock((Stock) copyPortfolio.stocks[i]);
 	}	
 	
 	/**
@@ -49,7 +52,7 @@ public class Portfolio {
 			if (this.stocks[i]==null)
 			{
 				this.stocks[getPortfolioSize()] = stock;
-				this.stocks[getPortfolioSize()].setStockQuantity(0);
+				((Stock) this.stocks[getPortfolioSize()]).setStockQuantity(0);
 				flag=false;
 				this.portfolioSize++;
 				break;
@@ -101,19 +104,19 @@ public class Portfolio {
 			{
 				if (quantity ==-1)
 				{					
-					this.updateBalance(stocks[i].getStockQuantity() * stocks[i].getBid());
-					this.stocks[i].setStockQuantity (0);
+					this.updateBalance(((Stock) stocks[i]).getStockQuantity() * stocks[i].getBid());
+					((Stock) this.stocks[i]).setStockQuantity (0);
 					return true;
 				}
-				else if (quantity > this.stocks[i].getStockQuantity())
+				else if (quantity > ((Stock) this.stocks[i]).getStockQuantity())
 				{
 					System.out.println("Not enough stocks to sell");
 					return false;
 				}
-				else if (this.stocks[i].getStockQuantity() >= quantity)
+				else if (((Stock) this.stocks[i]).getStockQuantity() >= quantity)
 				{
-					this.updateBalance(stocks[i].getStockQuantity() * stocks[i].getBid());
-					this.stocks[i].setStockQuantity((int) (this.stocks[i].getStockQuantity() - quantity));
+					this.updateBalance(((Stock) stocks[i]).getStockQuantity() * stocks[i].getBid());
+					((Stock) this.stocks[i]).setStockQuantity((int) (((Stock) this.stocks[i]).getStockQuantity() - quantity));
 					return true;
 				}
 			}
@@ -139,14 +142,14 @@ public class Portfolio {
 				if (quantity ==-1)
 				{
 					flag=false;
-					this.stocks[i].setStockQuantity ((int) (this.stocks[i].getStockQuantity()+(this.balance/stock.getAsk())));
+					((Stock) this.stocks[i]).setStockQuantity ((int) (((Stock) this.stocks[i]).getStockQuantity()+(this.balance/stock.getAsk())));
 					this.updateBalance(-(((this.balance/stock.getAsk()))*stock.getAsk()));
 					return true;
 				}
 				else
 				{
 					flag=false;
-					this.stocks[i].setStockQuantity ((int) (this.stocks[i].getStockQuantity()+quantity));
+					((Stock) this.stocks[i]).setStockQuantity ((int) (((Stock) this.stocks[i]).getStockQuantity()+quantity));
 					this.updateBalance(-(quantity*stock.getAsk()));
 					return true;
 				}
@@ -175,14 +178,14 @@ public class Portfolio {
 	 * change bid in Portfolio.
 	 */
 	public void changeBid(Portfolio Portfolio, int indexToChange,float newBid) {
-		Portfolio.stocks[indexToChange].setBid(newBid);
+		((Stock) Portfolio.stocks[indexToChange]).setBid(newBid);
 	}
 	
 	public float getStocksValue() {
 		float totalStocksValue = 0;
 		for (int i = 0; i < portfolioSize-1; i++)
 		{
-			totalStocksValue=totalStocksValue+(this.stocks[i].getStockQuantity()*this.stocks[i].getBid());
+			totalStocksValue=totalStocksValue+(((Stock) this.stocks[i]).getStockQuantity()*this.stocks[i].getBid());
 		}		
 		return totalStocksValue;
 	}
@@ -209,13 +212,13 @@ public class Portfolio {
 		return portfolioSize;
 	}
 	public Stock [] getStocks() {
-		return this.stocks;
+		return (Stock[]) this.stocks;
 	}
 	public String getHtmlString(){
 		String result = "<h1>"+ this.title+"</h1>";
 		for (int i=0; i <portfolioSize; i++)
 		{
-			result= result+ "<br>" + this.stocks[i].getHtmlDescription();
+			result= result+ "<br>" +((Stock) this.stocks[i]).getHtmlDescription();
 		}
 		return result;
 	}
