@@ -10,12 +10,14 @@ public class Portfolio implements PortfolioInterface {
 	/**
 	 *  the class for the Portfolio typhus and method
 	 */
-	public enum ALGO_RECOMMENDATIN {BUY, SELL, REMOVE, HOLD};
+	public enum ALGO_RECOMMENDATION {BUY, SELL, REMOVE, HOLD};
 	private String title;
 	private final static int MAX_PORTFOLIO_SIZE =5;
 	private StockInterface[] stocks;
 	private int portfolioSize;
 	private float balance;
+	
+	
 	
 	public Portfolio() {
 		this.stocks= new Stock [MAX_PORTFOLIO_SIZE];
@@ -29,6 +31,13 @@ public class Portfolio implements PortfolioInterface {
 		for(int i=0; i<this.getPortfolioSize();i++)
 			this.stocks[i]=new Stock((Stock) copyPortfolio.stocks[i]);
 	}	
+	
+	public Portfolio(Stock[] stockArray) {
+		this();
+		for (int i = 0; i<stockArray.length ; i++){
+			this.stocks[i] = stockArray[i];	
+		}
+	}
 	
 	/**
 	 *   method that update balance According amount 
@@ -129,15 +138,16 @@ public class Portfolio implements PortfolioInterface {
 	 *   method that buy stock According amount 
 	 *   and changes all  those affected from that buy.
 	 */
-	public boolean buyStock (Stock stock, int quantity)
+	public boolean buyStock (String symbol, int quantity)
 	{
+		Stock stock = (Stock) this.findStock(symbol);
 		int i;
 		boolean flag=true;;
 		if (quantity < -1 || quantity ==0)		
 			return false;
 		for ( i = 0; i <=this.getPortfolioSize() && flag; i++)
 		{
-			if (this.stocks[i] != null && this.stocks[i].getSymbol().equals(stock.getSymbol()))
+			if (this.stocks[i] != null && this.stocks[i].getSymbol().equals(symbol))
 			{
 				if (quantity ==-1)
 				{
@@ -228,4 +238,19 @@ public class Portfolio implements PortfolioInterface {
 	public void setStocks(Stock [] stocks) {
 		stocks = new Stock[MAX_PORTFOLIO_SIZE];
 	}
+
+	public static int getMaxSize() {
+		return MAX_PORTFOLIO_SIZE;
+	}
+	public StockInterface findStock(String symbol) {	
+		for (int i = 0; i< this.getPortfolioSize(); i++){
+			
+			if (symbol.equals(this.stocks[i].getSymbol()))
+			{
+				return this.stocks[i];
+			}
+		}
+		return null;
+	}
+
 }

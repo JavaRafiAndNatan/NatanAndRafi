@@ -5,7 +5,7 @@ import java.util.Date;
 
 import org.algo.model.StockInterface;
 
-import com.myorg.javacourse.model.Portfolio.ALGO_RECOMMENDATIN;
+import com.myorg.javacourse.model.Portfolio.ALGO_RECOMMENDATION;
 
 
 public class Stock implements StockInterface{
@@ -17,7 +17,7 @@ public class Stock implements StockInterface{
 	private Date date;
 	private String symbol;
 	private int stockQuantity;
-	private ALGO_RECOMMENDATIN recommendation;
+	private ALGO_RECOMMENDATION recommendation;
 
 	/**
 	 * set data into format
@@ -63,10 +63,10 @@ public class Stock implements StockInterface{
 	public void setStockQuantity(int stockQuantity) {
 		this.stockQuantity = stockQuantity;
 	}
-	public ALGO_RECOMMENDATIN getRecommendation() {
+	public ALGO_RECOMMENDATION getRecommendation() {
 		return recommendation;
 	}
-	public void setRecommendation(ALGO_RECOMMENDATIN recommendation) {
+	public void setRecommendation(ALGO_RECOMMENDATION recommendation) {
 		this.recommendation = recommendation;
 	}
 	public float getBid() {
@@ -84,5 +84,7 @@ public class Stock implements StockInterface{
 	public String getHtmlDescription(){
 		String result = "<b>Symbol:</b> "+ this.symbol + ", <b>Ask:</b> "+ this.ask + ", <b>Bid:</b> "+ this.bid + ", <b>Date:</b> "+ dataFormat.format(this.date)+ "<br>" ;
 		return result;
+	}
+	public Stock() {
 	}
 }
