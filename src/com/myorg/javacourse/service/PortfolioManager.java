@@ -133,9 +133,9 @@ public class PortfolioManager implements PortfolioManagerInterface {
 			Stock stock = fromDto(stockDto);
 			
 			//first thing, add it to portfolio.
-			portfolio.addStock(stock,symbol);   
+			//portfolio.addStock(stock,symbol);   
 			//or:
-			//portfolio.addStock(stock);   
+			portfolio.addStock(stock);   
 
 			//second thing, save the new stock to the database.
 			datastoreService.saveStock(toDto(portfolio.findStock(symbol)));
@@ -241,9 +241,18 @@ public class PortfolioManager implements PortfolioManagerInterface {
 
 			Stock[] stockArray = stockList.toArray(new Stock[stockList.size()]);
 			ret = new Portfolio(stockArray);
+			int stockCounter = 0;
+			for (StockInterface s : ret.getStocks()){
+				if(s != null)
+				{
+					stockCounter++;
+				}
+			}
+			ret.setPortfolioSize(stockCounter);
 		}
 
 		ret.setTitle(dto.getTitle());
+		
 		try {
 			ret.updateBalance(dto.getBalance());
 		} catch (Exception e) {

@@ -22,7 +22,7 @@ public class Stock implements StockInterface{
 	/**
 	 * set data into format
 	 */
-	private SimpleDateFormat dataFormat =new SimpleDateFormat("MM/dd/YYYY");
+	private transient SimpleDateFormat dataFormat =new SimpleDateFormat("MM/dd/YYYY");
 	
 	/**
 	 * set data to the stock
