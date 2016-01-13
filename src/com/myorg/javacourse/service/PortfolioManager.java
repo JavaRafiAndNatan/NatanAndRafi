@@ -19,6 +19,9 @@ import org.algo.service.MarketService;
 import org.algo.service.PortfolioManagerInterface;
 import org.algo.service.ServiceManager;
 
+import com.myorg.javacourse.exception.BalanceException;
+import com.myorg.javacourse.exception.PortfolioFullException;
+import com.myorg.javacourse.exception.StockAlreadyExistsException;
 import com.myorg.javacourse.model.Portfolio;
 import com.myorg.javacourse.model.Portfolio.ALGO_RECOMMENDATION;
 import com.myorg.javacourse.model.Stock;
@@ -60,6 +63,9 @@ public class PortfolioManager implements PortfolioManagerInterface {
 	}
 
 	@Override
+	/**
+	 * method that set the title of the protfolio .
+	 */
 	public void setTitle(String title) {
 		Portfolio portfolio = (Portfolio) getPortfolio();
 		portfolio.setTitle(title);
@@ -67,7 +73,10 @@ public class PortfolioManager implements PortfolioManagerInterface {
 	}
 
 	@Override
-	public void updateBalance(float value) throws PortfolioException {
+	/**
+	 * method that update the balance of protfolio According value .
+	 */
+	public void updateBalance(float value) throws BalanceException {
 		Portfolio portfolio = (Portfolio) getPortfolio();
 		portfolio.updateBalance(value);
 		flush(portfolio);
@@ -123,7 +132,7 @@ public class PortfolioManager implements PortfolioManagerInterface {
 	}
 
 	@Override
-	public void addStock(String symbol) throws PortfolioException {
+	public void addStock(String symbol) throws PortfolioFullException, StockAlreadyExistsException {
 		Portfolio portfolio = (Portfolio) getPortfolio();
 
 		try {
@@ -133,8 +142,6 @@ public class PortfolioManager implements PortfolioManagerInterface {
 			Stock stock = fromDto(stockDto);
 			
 			//first thing, add it to portfolio.
-			//portfolio.addStock(stock,symbol);   
-			//or:
 			portfolio.addStock(stock);   
 
 			//second thing, save the new stock to the database.
